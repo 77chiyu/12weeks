@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12週做完一年工作執行手冊</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700&family=Kiwi+Maru:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* 粉嫩莫蘭迪配色定義 */
+            --pastel-bg: #FFFBF5;
+            --pastel-pink: #FFDDE2;    /* 抽離時間塊 */
+            --pastel-green: #CDE990;   /* 3年願景主色 */
+            --pastel-blue: #AEE2FF;    /* 12週目標/工作塊主色 */
+            --pastel-yellow: #FFF5B7;  /* 1年願景主色 */
+            --pastel-purple: #E6E6FA;  /* 10年願景主色 */
+            --text-dark: #5A5A5A;
+            --white: #FFFFFF;
+            --font-main: 'Kiwi Maru', 'Noto Sans TC', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--pastel-bg);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            background: #4A4A4A;
+            color: #F8F8F8;
+            padding: 30px 0;
+            text-align: center;
+            letter-spacing: 5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        header h1 { margin: 0; font-size: 1.7rem; font-weight: 700; }
+        header p { margin: 8px 0 0 0; font-size: 0.85rem; opacity: 0.7; letter-spacing: 2px; }
+
+        .tabs { display: flex; gap: 15px; margin: 30px 0; }
+
+        .tab-btn {
+            padding: 12px 35px;
+            border: none;
+            background: var(--white);
+            border-radius: 15px;
+            cursor: pointer;
+            font-family: var(--font-main);
+            font-size: 1.1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.03);
+            transition: all 0.3s;
+            color: #999;
+            border: 1px solid #F0F0F0;
+        }
+
+        .tab-btn.active {
+            color: var(--text-dark);
+            background: var(--pastel-pink);
+            transform: translateY(-2px);
+            font-weight: bold;
+        }
+
+        .content-section { display: none; width: 95%; max-width: 1000px; margin-bottom: 50px; }
+        .content-section.active { display: block; }
+
+        /* --- 核心修改：色彩一致性卡片樣式 --- */
+        .card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            border-width: 3px;
+            border-style: solid;
+            border-top-width: 12px; /* 頂部粗線 */
+        }
+
+        /* 紫色系 - 10年願景 */
+        .theme-purple { 
+            border-color: #D8D8F5; 
+            border-top-color: #D8D8F5; 
+        }
+        .theme-purple .card-header { border-left: 10px solid #D8D8F5; }
+
+        /* 綠色系 - 3年願景 */
+        .theme-green { 
+            border-color: #D4E9A9; 
+            border-top-color: #D4E9A9; 
+        }
+        .theme-green .card-header { border-left: 10px solid #D4E9A9; }
+
+        /* 黃色系 - 1年願景 */
+        .theme-yellow { 
+            border-color: #FDF1B0; 
+            border-top-color: #FDF1B0; 
+        }
+        .theme-yellow .card-header { border-left: 10px solid #FDF1B0; }
+
+        /* 藍色系 - 12週目標 */
+        .theme-blue { 
+            border-color: #B9E5FF; 
+            border-top-color: #B9E5FF; 
+        }
+        .theme-blue .card-header { border-left: 10px solid #B9E5FF; }
+
+        .card-header {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-left: 20px;
+        }
+
+        /* --- 其餘樣式保留 --- */
+        .btn-suggest {
+            background: #F2F2F2;
+            color: #777;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: var(--font-main);
+            font-size: 0.9rem;
+        }
+
+        .vision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+
+        textarea, input {
+            width: 100%;
+            border: 1px solid #EEE;
+            border-radius: 12px;
+            padding: 18px;
+            font-family: var(--font-main);
+            font-size: 1rem;
+            margin-top: 10px;
+            background: #FAFAFA;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: 80px repeat(7, 1fr);
+            gap: 5px;
+            min-width: 800px;
+        }
+        .grid-header { text-align: center; font-weight: bold; padding: 15px 0; background: #F5F5F5; border-radius: 10px; font-size: 0.9rem; }
+        .time-cell { font-size: 0.75rem; color: #BBB; text-align: center; padding: 10px 0; }
+        .slot { height: 48px; background: #FDFDFD; border-radius: 8px; border: 1px solid #F9F9F9; cursor: pointer; font-size: 0.75rem; display: flex; align-items: center; justify-content: center; text-align: center; transition: 0.2s; }
+
+        /* 排程色塊 */
+        .slot-strategic { background-color: var(--pastel-yellow) !important; color: #887a00; }
+        .slot-working { background-color: var(--pastel-blue) !important; color: #3b5d7a; }
+        .slot-buffer { background-color: var(--pastel-green) !important; color: #4e6b2f; }
+        .slot-breakout { background-color: var(--pastel-pink) !important; color: #8a4a53; }
+
+        .helper-area { background: #F0F4F7; padding: 25px; border-radius: 20px; margin-bottom: 30px; }
+        .btn-action { background: var(--text-dark); color: white; border: none; padding: 10px 30px; border-radius: 10px; cursor: pointer; margin-top: 15px; font-family: var(--font-main); }
+
+        @media (max-width: 768px) { .vision-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>《12週做完一年工作》執行手冊</h1>
+        <p>STRATEGIC EXECUTION PLANNER</p>
+    </header>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('tab-vision')">願景與衝刺目標</button>
+        <button class="tab-btn" onclick="showTab('tab-schedule')">高效週時間模板</button>
+    </div>
+
+    <!-- 分頁一：願景與目標 -->
+    <div id="tab-vision" class="content-section active">
+        
+        <!-- 10年願景 (紫色系列) -->
+        <div class="card theme-purple">
+            <div class="card-header">
+                <span>10年後的理想生活</span>
+                <button class="btn-suggest" onclick="suggestGoals()">產生智慧建議</button>
+            </div>
+            <textarea id="vision-10" rows="3" placeholder="在此填寫理想生活，系統將依此產生建議..."></textarea>
+        </div>
+
+        <div class="vision-grid">
+            <!-- 3年願景 (綠色系列) -->
+            <div class="card theme-green">
+                <div class="card-header">3年願景</div>
+                <textarea id="vision-3" rows="8" placeholder="逐步萃取出的重要清單..."></textarea>
+            </div>
+            
+            <!-- 1年願景 (黃色系列) -->
+            <div class="card theme-yellow">
+                <div class="card-header">1年願景</div>
+                <textarea id="vision-1" rows="8" placeholder="今年結束前最重要的三個目標..."></textarea>
+            </div>
+        </div>
+
+        <!-- 12週目標 (藍色系列) -->
+        <div class="card theme-blue">
+            <div class="card-header">12週衝刺目標</div>
+            <div style="margin-bottom: 20px;">
+                <input type="text" id="g1-t" style="font-weight: bold; border-bottom: 2px solid var(--pastel-blue);" placeholder="目標 1">
+                <textarea id="g1-s" rows="2" placeholder="執行策略與領先指標"></textarea>
+            </div>
+            <div>
+                <input type="text" id="g2-t" style="font-weight: bold; border-bottom: 2px solid var(--pastel-green);" placeholder="目標 2">
+                <textarea id="g2-s" rows="2" placeholder="執行策略與領先指標"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- 分頁二：高效週模板 -->
+    <div id="tab-schedule" class="content-section">
+        <div class="card" style="border: 1px solid #EEE; border-top: 12px solid #EEE;">
+            <div class="card-header" style="border-left: 10px solid #CCC;">高效時間塊排程</div>
+            
+            <div class="helper-area">
+                <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">快速助手：請輸入如「一 09:00-18:00 正職工作」</div>
+                <input type="text" id="quickInput" placeholder="輸入星期、時間範圍與內容...">
+                <button class="btn-action" onclick="applyQuickInput()">一鍵填入表格</button>
+            </div>
+
+            <div style="overflow-x: auto; background: #FFF; padding: 10px; border-radius: 15px;">
+                <div class="schedule-grid" id="mainGrid">
+                    <!-- JS 生成 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(id) {
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        const days = ['時間', '週一', '週二', '週三', '週四', '週五', '週六', '週日'];
+        const grid = document.getElementById('mainGrid');
+
+        function init() {
+            days.forEach(d => {
+                const h = document.createElement('div');
+                h.className = 'grid-header';
+                h.innerText = d;
+                grid.appendChild(h);
+            });
+
+            for (let hour = 6; hour <= 24; hour++) {
+                const label = document.createElement('div');
+                label.className = 'time-cell';
+                label.innerText = `${hour.toString().padStart(2, '0')}:00`;
+                grid.appendChild(label);
+
+                for (let d = 1; d <= 7; d++) {
+                    const slot = document.createElement('div');
+                    slot.className = 'slot';
+                    slot.id = `slot-${d}-${hour}`;
+                    slot.onclick = () => cycleSlot(slot);
+                    grid.appendChild(slot);
+                }
+            }
+            loadData();
+        }
+
+        function cycleSlot(el) {
+            const types = ['', 'slot-strategic', 'slot-working', 'slot-buffer', 'slot-breakout'];
+            const names = ['', '策略', '工作', '緩衝', '抽離'];
+            let idx = 0;
+            types.forEach((t, i) => { if(t && el.classList.contains(t)) idx = i; });
+            let next = (idx + 1) % types.length;
+            el.className = 'slot ' + types[next];
+            el.innerText = names[next];
+            localStorage.setItem('slot-'+el.id, JSON.stringify({txt: el.innerText, cls: el.className}));
+        }
+
+        function suggestGoals() {
+            const v10 = document.getElementById('vision-10').value;
+            if(!v10) { alert("請先在10年願景中輸入關鍵字，如：財務、健康、學習"); return; }
+            let s = { v3: "1. 建立基礎\n2. 提升能力", v1: "1. 達成里程碑", g1: "衝刺項目", g1s: "執行清單" };
+            if(v10.includes("錢") || v10.includes("財務") || v10.includes("買房")) {
+                s = { v3: "1. 增加被動收入\n2. 達成首購儲蓄目標", v1: "1. 每月投入ETF\n2. 啟動副業", g1: "副業啟動", g1s: "每週投入10小時研究" };
+            } else if(v10.includes("健康") || v10.includes("運動")) {
+                s = { v3: "1. 恢復體能巔峰\n2. 建立運動習慣", v1: "1. 減重5公斤\n2. 週運3次", g1: "減脂計畫", g1s: "每天控制熱量並運動" };
+            }
+            document.getElementById('vision-3').value = s.v3;
+            document.getElementById('vision-1').value = s.v1;
+            document.getElementById('g1-t').value = s.g1;
+            document.getElementById('g1-s').value = s.g1s;
+            saveTextData();
+        }
+
+        function applyQuickInput() {
+            const val = document.getElementById('quickInput').value.trim();
+            const regex = /([一二三四五六日])\s*(\d{1,2}):\d{2}-(\d{1,2}):\d{2}\s*(.*)/;
+            const match = val.match(regex);
+            if (match) {
+                const dMap = {'一':1,'二':2,'三':3,'四':4,'五':5,'六':6,'日':7};
+                const d = dMap[match[1]], sH = parseInt(match[2]), eH = parseInt(match[3]), txt = match[4];
+                let cls = 'slot-working';
+                if(txt.includes('策略')) cls = 'slot-strategic';
+                else if(txt.includes('休息') || txt.includes('抽離')) cls = 'slot-breakout';
+                else if(txt.includes('緩衝')) cls = 'slot-buffer';
+                for (let h = sH; h < eH; h++) {
+                    const el = document.getElementById(`slot-${d}-${h}`);
+                    if (el) { el.innerText = txt; el.className = 'slot ' + cls; localStorage.setItem('slot-'+el.id, JSON.stringify({txt:txt, cls:el.className})); }
+                }
+                document.getElementById('quickInput').value = '';
+            } else { alert("格式範例：一 09:00-18:00 正職工作"); }
+        }
+
+        function saveTextData() {
+            document.querySelectorAll('textarea, input[type="text"]').forEach(el => {
+                localStorage.setItem('text-' + el.id, el.value);
+            });
+        }
+
+        function loadData() {
+            document.querySelectorAll('textarea, input[type="text"]').forEach(el => {
+                const saved = localStorage.getItem('text-' + el.id);
+                if (saved) el.value = saved;
+                el.oninput = saveTextData;
+            });
+            for (let h = 6; h <= 24; h++) {
+                for (let d = 1; d <= 7; d++) {
+                    const saved = localStorage.getItem(`slot-slot-${d}-${h}`);
+                    if (saved) {
+                        const obj = JSON.parse(saved);
+                        const el = document.getElementById(`slot-${d}-${h}`);
+                        el.innerText = obj.txt; el.className = obj.cls;
+                    }
+                }
+            }
+        }
+        window.onload = init;
+    </script>
+</body>
+</html>
