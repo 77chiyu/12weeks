@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>12週做完一年工作執行手冊 - 專業版</title>
+    <title>12週做完一年工作執行手冊 - 可愛圓框版</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700&family=Kiwi+Maru:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -68,98 +68,114 @@
         .content-section { display: none; width: 95%; max-width: 1000px; margin-bottom: 50px; }
         .content-section.active { display: block; }
 
+        /* 通用卡片設計 */
         .card {
             background: var(--white);
             border-radius: 20px;
             padding: 35px;
             margin-bottom: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.02);
-            border-width: 3px;
-            border-style: solid;
-            border-top-width: 12px;
+            border: 3px solid #EEE;
+            border-top: 12px solid #EEE;
         }
 
         .theme-purple { border-color: #D8D8F5; border-top-color: #D8D8F5; }
         .theme-green { border-color: #D4E9A9; border-top-color: #D4E9A9; }
         .theme-yellow { border-color: #FDF1B0; border-top-color: #FDF1B0; }
-        .theme-blue { border-color: #B9E5FF; border-top-color: #B9E5FF; }
 
-        .card-header {
-            font-size: 1.4rem;
-            font-weight: bold;
-            margin-bottom: 25px;
+        /* 12週目標專用：可愛圓框卡片 */
+        .goal-container {
+            margin-top: 40px;
+        }
+
+        .goal-card {
+            background: var(--white);
+            border: 2px solid var(--text-dark);
+            border-radius: 30px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.05); /* 輕微貼紙感 */
+        }
+
+        .goal-header-row {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding-left: 20px;
-            border-left: 10px solid transparent;
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
-        .theme-purple .card-header { border-left-color: #D8D8F5; }
-        .theme-green .card-header { border-left-color: #D4E9A9; }
-        .theme-yellow .card-header { border-left-color: #FDF1B0; }
-        .theme-blue .card-header { border-left-color: #B9E5FF; }
-
-        .btn-suggest {
-            background: #4A4A4A;
-            color: #FFF;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-family: var(--font-main);
+        .goal-label {
+            background: var(--text-dark);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
             font-size: 0.9rem;
-            transition: 0.3s;
-        }
-        .btn-suggest:hover { background: #333; transform: scale(1.05); }
-
-        .vision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
-
-        textarea, input {
-            width: 100%;
-            border: 1px solid #EEE;
-            border-radius: 12px;
-            padding: 15px;
-            font-family: var(--font-main);
-            font-size: 1rem;
-            margin-top: 5px;
-            background: #FAFAFA;
-            box-sizing: border-box;
-            outline: none;
+            font-weight: bold;
         }
 
-        .goal-table {
+        .goal-title-input {
+            flex: 1;
+            border: none;
+            border-bottom: 2px solid #DDD;
+            background: transparent;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 0;
+            padding: 5px;
+        }
+
+        /* 可愛圓框表格 */
+        .cute-table-wrapper {
+            border: 2px solid var(--text-dark);
+            border-radius: 20px;
+            overflow: hidden;
+            background: white;
+        }
+
+        .cute-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
-            border: 2px solid #333;
-            border-radius: 10px;
-            overflow: hidden;
         }
 
-        .goal-table th, .goal-table td {
-            border: 1px solid #333;
+        .cute-table th, .cute-table td {
+            border: 1px solid #EEE;
             padding: 12px;
             text-align: center;
         }
 
-        .goal-table th { background-color: #F9F9F9; font-weight: bold; }
-        .goal-table .col-strategy { text-align: left; width: 50%; }
-        .goal-table .col-time { width: 20%; }
-        .goal-table .col-check { width: 20%; }
+        .cute-table th {
+            background-color: #FAFAFA;
+            font-weight: bold;
+            font-size: 0.9rem;
+            border-bottom: 2px solid var(--text-dark);
+        }
 
-        .goal-table input {
-            background: transparent;
+        .cute-table input {
             border: none;
-            padding: 5px;
-            margin: 0;
-            text-align: inherit;
+            background: transparent;
+            width: 100%;
+            text-align: center;
+            font-family: var(--font-main);
         }
 
         .total-row {
-            background-color: #F9F9F9;
+            background: #F9F9F9;
+            border-top: 2px solid var(--text-dark);
             font-weight: bold;
         }
+
+        /* 其他元件 */
+        .card-header { font-size: 1.4rem; font-weight: bold; margin-bottom: 25px; display: flex; align-items: center; justify-content: space-between; border-left: 10px solid #EEE; padding-left: 15px; }
+        .theme-purple .card-header { border-left-color: #D8D8F5; }
+        .theme-green .card-header { border-left-color: #D4E9A9; }
+        .theme-yellow .card-header { border-left-color: #FDF1B0; }
+
+        .btn-suggest { background: #4A4A4A; color: #FFF; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-family: var(--font-main); font-size: 0.9rem; transition: 0.3s; }
+        .btn-suggest:hover { background: #333; transform: scale(1.05); }
+
+        .vision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+
+        textarea { width: 100%; border: 1px solid #EEE; border-radius: 12px; padding: 15px; font-family: var(--font-main); font-size: 1rem; margin-top: 5px; background: #FAFAFA; box-sizing: border-box; outline: none; }
 
         .schedule-grid { display: grid; grid-template-columns: 80px repeat(7, 1fr); gap: 5px; min-width: 800px; }
         .grid-header { text-align: center; font-weight: bold; padding: 15px 0; background: #F5F5F5; border-radius: 10px; font-size: 0.9rem; }
@@ -187,20 +203,22 @@
         <button class="tab-btn" onclick="showTab('tab-schedule')">高效週時間模板</button>
     </div>
 
+    <!-- 分頁一：願景與目標 -->
     <div id="tab-vision" class="content-section active">
         
+        <!-- 10年願景 -->
         <div class="card theme-purple">
             <div class="card-header">
                 <span>10年後的理想生活</span>
-                <button class="btn-suggest" onclick="suggestGoals()">點我產生 12 週在地化策略</button>
+                <button class="btn-suggest" onclick="suggestGoals()">產生在地化策略建議</button>
             </div>
-            <textarea id="vision-10" rows="2" placeholder="在此填寫理想生活關鍵字（如：財務自由、健康、轉職、創業）..."></textarea>
+            <textarea id="vision-10" rows="2" placeholder="在此大膽想像，並填寫理想生活關鍵字（如：財務自由、健康、轉職、創業）..."></textarea>
         </div>
 
         <div class="vision-grid">
             <div class="card theme-green">
                 <div class="card-header">3年願景</div>
-                <textarea id="vision-3" rows="5" placeholder="例如：在台北買房、職級晉升到資深主管..."></textarea>
+                <textarea id="vision-3" rows="5" placeholder="例如：在台北買房、找到理想工作..."></textarea>
             </div>
             <div class="card theme-yellow">
                 <div class="card-header">1年願景</div>
@@ -208,41 +226,96 @@
             </div>
         </div>
 
-        <div class="card theme-blue">
-            <div class="card-header">12週衝刺目標</div>
-            <p style="font-size: 0.85rem; color: #888; margin-top: -15px;">請從 1 年願景中，拆解出 1 到 3 個接下來 12 週要全力衝刺的小目標。記住 SMART 原則，並將目標拆解為你能完全控制的領先指標。</p>
-            
-            <div style="margin-top: 20px;">
-                <label style="font-weight: bold;">目標 1：</label>
-                <input type="text" id="goal-1-title" style="width: 80%; border:none; border-bottom: 2px solid #333; background:transparent; border-radius: 0;" placeholder="請輸入本階段核心目標">
-                
-                <table class="goal-table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th class="col-strategy">領先指標 (策略)</th>
-                            <th class="col-time">預計完成時間</th>
-                            <th class="col-check">檢核完成度</th>
-                        </tr>
-                    </thead>
-                    <tbody id="goal-1-body">
-                        <tr><td>1</td><td><input type="text" id="g1-s1"></td><td><input type="text" id="g1-t1"></td><td><input type="text" id="g1-c1" oninput="calcTotal()"></td></tr>
-                        <tr><td>2</td><td><input type="text" id="g1-s2"></td><td><input type="text" id="g1-t2"></td><td><input type="text" id="g1-c2" oninput="calcTotal()"></td></tr>
-                        <tr><td>3</td><td><input type="text" id="g1-s3"></td><td><input type="text" id="g1-t3"></td><td><input type="text" id="g1-c3" oninput="calcTotal()"></td></tr>
-                        <tr><td>4</td><td><input type="text" id="g1-s4"></td><td><input type="text" id="g1-t4"></td><td><input type="text" id="g1-c4" oninput="calcTotal()"></td></tr>
-                        <tr><td>5</td><td><input type="text" id="g1-s5"></td><td><input type="text" id="g1-t5"></td><td><input type="text" id="g1-c5" oninput="calcTotal()"></td></tr>
-                    </tbody>
-                    <tfoot>
-                        <tr class="total-row">
-                            <td colspan="3" style="text-align: right;">目標 1 總達成率</td>
-                            <td id="g1-total">0%</td>
-                        </tr>
-                    </tfoot>
-                </table>
+        <div class="goal-container">
+            <h2 style="text-align: center; margin-bottom: 30px;">12週衝刺目標區</h2>
+
+            <!-- 目標 1 -->
+            <div class="goal-card" style="background-color: #F9FDFF; border-color: var(--pastel-blue);">
+                <div class="goal-header-row">
+                    <div class="goal-label" style="background-color: #5BAED4;">目標 1</div>
+                    <input type="text" id="goal-1-title" class="goal-title-input" placeholder="請輸入核心目標">
+                </div>
+                <div class="cute-table-wrapper">
+                    <table class="cute-table">
+                        <thead>
+                            <tr><th>#</th><th style="width: 50%;">領先指標 (策略)</th><th>預計完成時間</th><th>檢核完成度</th></tr>
+                        </thead>
+                        <tbody id="goal-1-body">
+                            <tr><td>1</td><td><input type="text" id="g1-s1"></td><td><input type="text" id="g1-t1"></td><td><input type="text" id="g1-c1" oninput="calcTotal(1)" placeholder="0"></td></tr>
+                            <tr><td>2</td><td><input type="text" id="g1-s2"></td><td><input type="text" id="g1-t2"></td><td><input type="text" id="g1-c2" oninput="calcTotal(1)" placeholder="0"></td></tr>
+                            <tr><td>3</td><td><input type="text" id="g1-s3"></td><td><input type="text" id="g1-t3"></td><td><input type="text" id="g1-c3" oninput="calcTotal(1)" placeholder="0"></td></tr>
+                            <tr><td>4</td><td><input type="text" id="g1-s4"></td><td><input type="text" id="g1-t4"></td><td><input type="text" id="g1-c4" oninput="calcTotal(1)" placeholder="0"></td></tr>
+                            <tr><td>5</td><td><input type="text" id="g1-s5"></td><td><input type="text" id="g1-t5"></td><td><input type="text" id="g1-c5" oninput="calcTotal(1)" placeholder="0"></td></tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="total-row">
+                                <td colspan="3" style="text-align: right; padding-right: 20px;">目標 1 總達成率</td>
+                                <td id="g1-total" style="color: #5BAED4;">0%</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 目標 2 -->
+            <div class="goal-card" style="background-color: #FAFFF0; border-color: var(--pastel-green);">
+                <div class="goal-header-row">
+                    <div class="goal-label" style="background-color: #8BAE42;">目標 2</div>
+                    <input type="text" id="goal-2-title" class="goal-title-input" placeholder="請輸入核心目標">
+                </div>
+                <div class="cute-table-wrapper">
+                    <table class="cute-table">
+                        <thead>
+                            <tr><th>#</th><th style="width: 50%;">領先指標 (策略)</th><th>預計完成時間</th><th>檢核完成度</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td><input type="text" id="g2-s1"></td><td><input type="text" id="g2-t1"></td><td><input type="text" id="g2-c1" oninput="calcTotal(2)" placeholder="0"></td></tr>
+                            <tr><td>2</td><td><input type="text" id="g2-s2"></td><td><input type="text" id="g2-t2"></td><td><input type="text" id="g2-c2" oninput="calcTotal(2)" placeholder="0"></td></tr>
+                            <tr><td>3</td><td><input type="text" id="g2-s3"></td><td><input type="text" id="g2-t3"></td><td><input type="text" id="g2-c3" oninput="calcTotal(2)" placeholder="0"></td></tr>
+                            <tr><td>4</td><td><input type="text" id="g2-s4"></td><td><input type="text" id="g2-t4"></td><td><input type="text" id="g2-c4" oninput="calcTotal(2)" placeholder="0"></td></tr>
+                            <tr><td>5</td><td><input type="text" id="g2-s5"></td><td><input type="text" id="g2-t5"></td><td><input type="text" id="g2-c5" oninput="calcTotal(2)" placeholder="0"></td></tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="total-row">
+                                <td colspan="3" style="text-align: right; padding-right: 20px;">目標 2 總達成率</td>
+                                <td id="g2-total" style="color: #8BAE42;">0%</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 目標 3 -->
+            <div class="goal-card" style="background-color: #FFF9FA; border-color: var(--pastel-pink);">
+                <div class="goal-header-row">
+                    <div class="goal-label" style="background-color: #D67A89;">目標 3</div>
+                    <input type="text" id="goal-3-title" class="goal-title-input" placeholder="請輸入核心目標">
+                </div>
+                <div class="cute-table-wrapper">
+                    <table class="cute-table">
+                        <thead>
+                            <tr><th>#</th><th style="width: 50%;">領先指標 (策略)</th><th>預計完成時間</th><th>檢核完成度</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td><input type="text" id="g3-s1"></td><td><input type="text" id="g3-t1"></td><td><input type="text" id="g3-c1" oninput="calcTotal(3)" placeholder="0"></td></tr>
+                            <tr><td>2</td><td><input type="text" id="g3-s2"></td><td><input type="text" id="g3-t2"></td><td><input type="text" id="g3-c2" oninput="calcTotal(3)" placeholder="0"></td></tr>
+                            <tr><td>3</td><td><input type="text" id="g3-s3"></td><td><input type="text" id="g3-t3"></td><td><input type="text" id="g3-c3" oninput="calcTotal(3)" placeholder="0"></td></tr>
+                            <tr><td>4</td><td><input type="text" id="g3-s4"></td><td><input type="text" id="g3-t4"></td><td><input type="text" id="g3-c4" oninput="calcTotal(3)" placeholder="0"></td></tr>
+                            <tr><td>5</td><td><input type="text" id="g3-s5"></td><td><input type="text" id="g3-t5"></td><td><input type="text" id="g3-c5" oninput="calcTotal(3)" placeholder="0"></td></tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="total-row">
+                                <td colspan="3" style="text-align: right; padding-right: 20px;">目標 3 總達成率</td>
+                                <td id="g3-total" style="color: #D67A89;">0%</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- 分頁二：高效週模板 -->
     <div id="tab-schedule" class="content-section">
         <div class="card" style="border-top: 12px solid #EEE;">
             <div class="card-header" style="border-left: 10px solid #CCC;">高效時間塊排程</div>
@@ -287,7 +360,7 @@
                 }
             }
             loadData();
-            calcTotal();
+            for(let i=1; i<=3; i++) calcTotal(i);
         }
 
         function cycleSlot(el) {
@@ -324,11 +397,11 @@
                     v3: "1. 達成首購自備款儲蓄目標\n2. 建立月領 1 萬配息組合",
                     v1: "1. 每月定期定額投入 0050/006208\n2. 研究高股息 ETF (00878/00919)",
                     strategies: [
-                        { s: "設定自動轉帳至證券戶 (定期定額)", t: "第 1 週" },
+                        { s: "設定自動轉帳至證券戶定期定額", t: "第 1 週" },
                         { s: "使用麻布記帳或 Excel 每日記帳", t: "第 1-12 週" },
-                        { s: "看 12 部財經頻道影片 (如：柴鼠、清流君)", t: "每週 1 部" },
+                        { s: "看 12 部財經頻道影片", t: "每週 1 部" },
                         { s: "研究 3 間台灣潛力企業財報", t: "第 6-9 週" },
-                        { s: "減少外送 (UberEats) 次數至每週 1 次", t: "第 1-12 週" }
+                        { s: "減少外送消費至每週 1 次", t: "第 1-12 週" }
                     ]
                 };
             } else if(v10.includes("健康") || v10.includes("運動") || v10.includes("減肥")) {
@@ -339,22 +412,9 @@
                     strategies: [
                         { s: "每週至健身房 (WorldGym/健工) 3 次", t: "第 1-12 週" },
                         { s: "每日飲水量達到 2500c.c.", t: "第 1-12 週" },
-                        { s: "週末安排一次象山或陽明山健行", t: "每雙週一次" },
-                        { s: "晚上 11:00 前上床睡覺，確保 7 小時睡眠", t: "第 1-12 週" },
+                        { s: "週末安排一次象山或在地健行", t: "每雙週一次" },
+                        { s: "晚上 11:00 前上床睡覺", t: "第 1-12 週" },
                         { s: "戒掉每日一杯手搖飲 (或改無糖)", t: "第 1-12 週" }
-                    ]
-                };
-            } else if(v10.includes("創業") || v10.includes("副業") || v10.includes("社群")) {
-                suggestion = {
-                    title: "自媒體與副業啟動計畫",
-                    v3: "1. 副業收入超過本薪\n2. 社群追蹤破萬",
-                    v1: "1. 開啟 IG/Threads 帳號並經營\n2. 測試第一款產品上架",
-                    strategies: [
-                        { s: "每週在 Threads/IG 發布 3 篇圖文", t: "第 1-12 週" },
-                        { s: "研究 10 個競品帳號的爆款內容", t: "第 2 週" },
-                        { s: "學習使用 AI 工具 (ChatGPT/Midjourney) 產圖", t: "第 3-5 週" },
-                        { s: "設計第一份免費領取的電子報/資源", t: "第 8 週" },
-                        { s: "與一位同行進行線上交流或異業合作", t: "第 11 週" }
                     ]
                 };
             }
@@ -365,22 +425,22 @@
             suggestion.strategies.forEach((item, idx) => {
                 document.getElementById(`g1-s${idx+1}`).value = item.s;
                 document.getElementById(`g1-t${idx+1}`).value = item.t;
-                document.getElementById(`g1-c${idx+1}`).value = "0%";
+                document.getElementById(`g1-c${idx+1}`).value = "0";
             });
             saveTextData();
-            calcTotal();
+            calcTotal(1);
         }
 
-        function calcTotal() {
+        function calcTotal(goalId) {
             let total = 0;
             let count = 0;
             for(let i=1; i<=5; i++) {
-                let val = document.getElementById(`g1-c${i}`).value;
+                let val = document.getElementById(`g${goalId}-c${i}`).value;
                 let num = parseFloat(val) || 0;
                 total += num;
                 count++;
             }
-            document.getElementById('g1-total').innerText = Math.round(total / count) + "%";
+            document.getElementById(`g${goalId}-total`).innerText = Math.round(total / count) + "%";
         }
 
         function applyQuickInput() {
@@ -412,7 +472,7 @@
             document.querySelectorAll('textarea, input[type="text"]').forEach(el => {
                 const saved = localStorage.getItem('text-' + el.id);
                 if (saved) el.value = saved;
-                el.oninput = () => { saveTextData(); if(el.id.includes('-c')) calcTotal(); };
+                el.oninput = () => { saveTextData(); if(el.id.includes('-c')) { let id = el.id.substring(1,2); calcTotal(id); } };
             });
             for (let h = 6; h <= 24; h++) {
                 for (let d = 1; d <= 7; d++) {
