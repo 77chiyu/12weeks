@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12週做完一年工作執行手冊 - 專業版</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700&family=Kiwi+Maru:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pastel-bg: #FFFBF5;
+            --pastel-pink: #FFDDE2;
+            --pastel-green: #CDE990;
+            --pastel-blue: #AEE2FF;
+            --pastel-yellow: #FFF5B7;
+            --pastel-purple: #E6E6FA;
+            --text-dark: #5A5A5A;
+            --white: #FFFFFF;
+            --font-main: 'Kiwi Maru', 'Noto Sans TC', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--pastel-bg);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            background: #4A4A4A;
+            color: #F8F8F8;
+            padding: 30px 0;
+            text-align: center;
+            letter-spacing: 5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        header h1 { margin: 0; font-size: 1.7rem; font-weight: 700; }
+        header p { margin: 8px 0 0 0; font-size: 0.85rem; opacity: 0.7; letter-spacing: 2px; }
+
+        .tabs { display: flex; gap: 15px; margin: 30px 0; }
+
+        .tab-btn {
+            padding: 12px 35px;
+            border: none;
+            background: var(--white);
+            border-radius: 15px;
+            cursor: pointer;
+            font-family: var(--font-main);
+            font-size: 1.1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.03);
+            transition: all 0.3s;
+            color: #999;
+            border: 1px solid #F0F0F0;
+        }
+
+        .tab-btn.active {
+            color: var(--text-dark);
+            background: var(--pastel-pink);
+            transform: translateY(-2px);
+            font-weight: bold;
+        }
+
+        .content-section { display: none; width: 95%; max-width: 1000px; margin-bottom: 50px; }
+        .content-section.active { display: block; }
+
+        .card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            border-width: 3px;
+            border-style: solid;
+            border-top-width: 12px;
+        }
+
+        .theme-purple { border-color: #D8D8F5; border-top-color: #D8D8F5; }
+        .theme-green { border-color: #D4E9A9; border-top-color: #D4E9A9; }
+        .theme-yellow { border-color: #FDF1B0; border-top-color: #FDF1B0; }
+        .theme-blue { border-color: #B9E5FF; border-top-color: #B9E5FF; }
+
+        .card-header {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-left: 20px;
+            border-left: 10px solid transparent;
+        }
+
+        .theme-purple .card-header { border-left-color: #D8D8F5; }
+        .theme-green .card-header { border-left-color: #D4E9A9; }
+        .theme-yellow .card-header { border-left-color: #FDF1B0; }
+        .theme-blue .card-header { border-left-color: #B9E5FF; }
+
+        .btn-suggest {
+            background: #4A4A4A;
+            color: #FFF;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: var(--font-main);
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .btn-suggest:hover { background: #333; transform: scale(1.05); }
+
+        .vision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+
+        textarea, input {
+            width: 100%;
+            border: 1px solid #EEE;
+            border-radius: 12px;
+            padding: 15px;
+            font-family: var(--font-main);
+            font-size: 1rem;
+            margin-top: 5px;
+            background: #FAFAFA;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .goal-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .goal-table th, .goal-table td {
+            border: 1px solid #333;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .goal-table th { background-color: #F9F9F9; font-weight: bold; }
+        .goal-table .col-strategy { text-align: left; width: 50%; }
+        .goal-table .col-time { width: 20%; }
+        .goal-table .col-check { width: 20%; }
+
+        .goal-table input {
+            background: transparent;
+            border: none;
+            padding: 5px;
+            margin: 0;
+            text-align: inherit;
+        }
+
+        .total-row {
+            background-color: #F9F9F9;
+            font-weight: bold;
+        }
+
+        .schedule-grid { display: grid; grid-template-columns: 80px repeat(7, 1fr); gap: 5px; min-width: 800px; }
+        .grid-header { text-align: center; font-weight: bold; padding: 15px 0; background: #F5F5F5; border-radius: 10px; font-size: 0.9rem; }
+        .time-cell { font-size: 0.75rem; color: #BBB; text-align: center; padding: 10px 0; }
+        .slot { height: 48px; background: #FDFDFD; border-radius: 8px; border: 1px solid #F9F9F9; cursor: pointer; font-size: 0.75rem; display: flex; align-items: center; justify-content: center; text-align: center; transition: 0.2s; }
+        .slot-strategic { background-color: var(--pastel-yellow) !important; color: #887a00; }
+        .slot-working { background-color: var(--pastel-blue) !important; color: #3b5d7a; }
+        .slot-buffer { background-color: var(--pastel-green) !important; color: #4e6b2f; }
+        .slot-breakout { background-color: var(--pastel-pink) !important; color: #8a4a53; }
+        .helper-area { background: #F0F4F7; padding: 25px; border-radius: 20px; margin-bottom: 30px; }
+        .btn-action { background: var(--text-dark); color: white; border: none; padding: 10px 30px; border-radius: 10px; cursor: pointer; margin-top: 15px; font-family: var(--font-main); }
+
+        @media (max-width: 768px) { .vision-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>《12週做完一年工作》執行手冊</h1>
+        <p>STRATEGIC EXECUTION PLANNER (TAIWAN EDITION)</p>
+    </header>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('tab-vision')">願景與衝刺目標</button>
+        <button class="tab-btn" onclick="showTab('tab-schedule')">高效週時間模板</button>
+    </div>
+
+    <div id="tab-vision" class="content-section active">
+        
+        <div class="card theme-purple">
+            <div class="card-header">
+                <span>10年後的理想生活</span>
+                <button class="btn-suggest" onclick="suggestGoals()">點我產生 12 週在地化策略</button>
+            </div>
+            <textarea id="vision-10" rows="2" placeholder="在此填寫理想生活關鍵字（如：財務自由、健康、轉職、創業）..."></textarea>
+        </div>
+
+        <div class="vision-grid">
+            <div class="card theme-green">
+                <div class="card-header">3年願景</div>
+                <textarea id="vision-3" rows="5" placeholder="例如：在台北買房、職級晉升到資深主管..."></textarea>
+            </div>
+            <div class="card theme-yellow">
+                <div class="card-header">1年願景</div>
+                <textarea id="vision-1" rows="5" placeholder="今年結束前最重要的三個大目標..."></textarea>
+            </div>
+        </div>
+
+        <div class="card theme-blue">
+            <div class="card-header">12週衝刺目標</div>
+            <p style="font-size: 0.85rem; color: #888; margin-top: -15px;">請從 1 年願景中，拆解出 1 到 3 個接下來 12 週要全力衝刺的小目標。記住 SMART 原則，並將目標拆解為你能完全控制的領先指標。</p>
+            
+            <div style="margin-top: 20px;">
+                <label style="font-weight: bold;">目標 1：</label>
+                <input type="text" id="goal-1-title" style="width: 80%; border:none; border-bottom: 2px solid #333; background:transparent; border-radius: 0;" placeholder="請輸入本階段核心目標">
+                
+                <table class="goal-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th class="col-strategy">領先指標 (策略)</th>
+                            <th class="col-time">預計完成時間</th>
+                            <th class="col-check">檢核完成度</th>
+                        </tr>
+                    </thead>
+                    <tbody id="goal-1-body">
+                        <tr><td>1</td><td><input type="text" id="g1-s1"></td><td><input type="text" id="g1-t1"></td><td><input type="text" id="g1-c1" oninput="calcTotal()"></td></tr>
+                        <tr><td>2</td><td><input type="text" id="g1-s2"></td><td><input type="text" id="g1-t2"></td><td><input type="text" id="g1-c2" oninput="calcTotal()"></td></tr>
+                        <tr><td>3</td><td><input type="text" id="g1-s3"></td><td><input type="text" id="g1-t3"></td><td><input type="text" id="g1-c3" oninput="calcTotal()"></td></tr>
+                        <tr><td>4</td><td><input type="text" id="g1-s4"></td><td><input type="text" id="g1-t4"></td><td><input type="text" id="g1-c4" oninput="calcTotal()"></td></tr>
+                        <tr><td>5</td><td><input type="text" id="g1-s5"></td><td><input type="text" id="g1-t5"></td><td><input type="text" id="g1-c5" oninput="calcTotal()"></td></tr>
+                    </tbody>
+                    <tfoot>
+                        <tr class="total-row">
+                            <td colspan="3" style="text-align: right;">目標 1 總達成率</td>
+                            <td id="g1-total">0%</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="tab-schedule" class="content-section">
+        <div class="card" style="border-top: 12px solid #EEE;">
+            <div class="card-header" style="border-left: 10px solid #CCC;">高效時間塊排程</div>
+            <div class="helper-area">
+                <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">快速助手：輸入範例「一 09:00-11:00 策略塊」</div>
+                <input type="text" id="quickInput" placeholder="輸入星期、時間範圍與內容...">
+                <button class="btn-action" onclick="applyQuickInput()">一鍵填入表格</button>
+            </div>
+            <div style="overflow-x: auto; background: #FFF; padding: 10px; border-radius: 15px;">
+                <div class="schedule-grid" id="mainGrid"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(id) {
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        const days = ['時間', '週一', '週二', '週三', '週四', '週五', '週六', '週日'];
+        const grid = document.getElementById('mainGrid');
+
+        function init() {
+            days.forEach(d => {
+                const h = document.createElement('div');
+                h.className = 'grid-header'; h.innerText = d;
+                grid.appendChild(h);
+            });
+
+            for (let hour = 6; hour <= 24; hour++) {
+                const label = document.createElement('div');
+                label.className = 'time-cell'; label.innerText = `${hour.toString().padStart(2, '0')}:00`;
+                grid.appendChild(label);
+                for (let d = 1; d <= 7; d++) {
+                    const slot = document.createElement('div');
+                    slot.className = 'slot'; slot.id = `slot-${d}-${hour}`;
+                    slot.onclick = () => cycleSlot(slot);
+                    grid.appendChild(slot);
+                }
+            }
+            loadData();
+            calcTotal();
+        }
+
+        function cycleSlot(el) {
+            const types = ['', 'slot-strategic', 'slot-working', 'slot-buffer', 'slot-breakout'];
+            const names = ['', '策略', '工作', '緩衝', '抽離'];
+            let idx = 0;
+            types.forEach((t, i) => { if(t && el.classList.contains(t)) idx = i; });
+            let next = (idx + 1) % types.length;
+            el.className = 'slot ' + types[next];
+            el.innerText = names[next];
+            localStorage.setItem('slot-'+el.id, JSON.stringify({txt: el.innerText, cls: el.className}));
+        }
+
+        function suggestGoals() {
+            const v10 = document.getElementById('vision-10').value;
+            if(!v10) { alert("請先在 10 年願景中輸入關鍵字，如：財務、健康、轉職"); return; }
+            
+            let suggestion = {
+                title: "綜合成長計畫",
+                v3: "建立穩定被動收入與專業影響力",
+                v1: "達成特定證照或資產累積目標",
+                strategies: [
+                    { s: "每週閱讀 1 本商管書籍並寫筆記", t: "第 1-12 週" },
+                    { s: "每週安排 2 次策略塊規劃下一週", t: "第 1-12 週" },
+                    { s: "參加 1 場實體產業交流聚會", t: "第 4, 8 週" },
+                    { s: "完成 1 堂 Hahow 或 Coursera 課程", t: "第 10 週" },
+                    { s: "整理並優化 Linkedin 檔案", t: "第 12 週" }
+                ]
+            };
+
+            if(v10.includes("錢") || v10.includes("財務") || v10.includes("買房")) {
+                suggestion = {
+                    title: "在地化財富躍遷計畫",
+                    v3: "1. 達成首購自備款儲蓄目標\n2. 建立月領 1 萬配息組合",
+                    v1: "1. 每月定期定額投入 0050/006208\n2. 研究高股息 ETF (00878/00919)",
+                    strategies: [
+                        { s: "設定自動轉帳至證券戶 (定期定額)", t: "第 1 週" },
+                        { s: "使用麻布記帳或 Excel 每日記帳", t: "第 1-12 週" },
+                        { s: "看 12 部財經頻道影片 (如：柴鼠、清流君)", t: "每週 1 部" },
+                        { s: "研究 3 間台灣潛力企業財報", t: "第 6-9 週" },
+                        { s: "減少外送 (UberEats) 次數至每週 1 次", t: "第 1-12 週" }
+                    ]
+                };
+            } else if(v10.includes("健康") || v10.includes("運動") || v10.includes("減肥")) {
+                suggestion = {
+                    title: "體能巔峰衝刺計畫",
+                    v3: "1. 體脂降至 20% 以下\n2. 養成每週運動 4 天習慣",
+                    v1: "1. 減重 8 公斤\n2. 完成一次半馬或百岳登頂",
+                    strategies: [
+                        { s: "每週至健身房 (WorldGym/健工) 3 次", t: "第 1-12 週" },
+                        { s: "每日飲水量達到 2500c.c.", t: "第 1-12 週" },
+                        { s: "週末安排一次象山或陽明山健行", t: "每雙週一次" },
+                        { s: "晚上 11:00 前上床睡覺，確保 7 小時睡眠", t: "第 1-12 週" },
+                        { s: "戒掉每日一杯手搖飲 (或改無糖)", t: "第 1-12 週" }
+                    ]
+                };
+            } else if(v10.includes("創業") || v10.includes("副業") || v10.includes("社群")) {
+                suggestion = {
+                    title: "自媒體與副業啟動計畫",
+                    v3: "1. 副業收入超過本薪\n2. 社群追蹤破萬",
+                    v1: "1. 開啟 IG/Threads 帳號並經營\n2. 測試第一款產品上架",
+                    strategies: [
+                        { s: "每週在 Threads/IG 發布 3 篇圖文", t: "第 1-12 週" },
+                        { s: "研究 10 個競品帳號的爆款內容", t: "第 2 週" },
+                        { s: "學習使用 AI 工具 (ChatGPT/Midjourney) 產圖", t: "第 3-5 週" },
+                        { s: "設計第一份免費領取的電子報/資源", t: "第 8 週" },
+                        { s: "與一位同行進行線上交流或異業合作", t: "第 11 週" }
+                    ]
+                };
+            }
+
+            document.getElementById('vision-3').value = suggestion.v3;
+            document.getElementById('vision-1').value = suggestion.v1;
+            document.getElementById('goal-1-title').value = suggestion.title;
+            suggestion.strategies.forEach((item, idx) => {
+                document.getElementById(`g1-s${idx+1}`).value = item.s;
+                document.getElementById(`g1-t${idx+1}`).value = item.t;
+                document.getElementById(`g1-c${idx+1}`).value = "0%";
+            });
+            saveTextData();
+            calcTotal();
+        }
+
+        function calcTotal() {
+            let total = 0;
+            let count = 0;
+            for(let i=1; i<=5; i++) {
+                let val = document.getElementById(`g1-c${i}`).value;
+                let num = parseFloat(val) || 0;
+                total += num;
+                count++;
+            }
+            document.getElementById('g1-total').innerText = Math.round(total / count) + "%";
+        }
+
+        function applyQuickInput() {
+            const val = document.getElementById('quickInput').value.trim();
+            const regex = /([一二三四五六日])\s*(\d{1,2}):\d{2}-(\d{1,2}):\d{2}\s*(.*)/;
+            const match = val.match(regex);
+            if (match) {
+                const dMap = {'一':1,'二':2,'三':3,'四':4,'五':5,'六':6,'日':7};
+                const d = dMap[match[1]], sH = parseInt(match[2]), eH = parseInt(match[3]), txt = match[4];
+                let cls = 'slot-working';
+                if(txt.includes('策略')) cls = 'slot-strategic';
+                else if(txt.includes('休息') || txt.includes('抽離')) cls = 'slot-breakout';
+                else if(txt.includes('緩衝')) cls = 'slot-buffer';
+                for (let h = sH; h < eH; h++) {
+                    const el = document.getElementById(`slot-${d}-${h}`);
+                    if (el) { el.innerText = txt; el.className = 'slot ' + cls; localStorage.setItem('slot-'+el.id, JSON.stringify({txt:txt, cls:el.className})); }
+                }
+                document.getElementById('quickInput').value = '';
+            } else { alert("格式範例：一 09:00-11:00 策略塊"); }
+        }
+
+        function saveTextData() {
+            document.querySelectorAll('textarea, input[type="text"]').forEach(el => {
+                localStorage.setItem('text-' + el.id, el.value);
+            });
+        }
+
+        function loadData() {
+            document.querySelectorAll('textarea, input[type="text"]').forEach(el => {
+                const saved = localStorage.getItem('text-' + el.id);
+                if (saved) el.value = saved;
+                el.oninput = () => { saveTextData(); if(el.id.includes('-c')) calcTotal(); };
+            });
+            for (let h = 6; h <= 24; h++) {
+                for (let d = 1; d <= 7; d++) {
+                    const saved = localStorage.getItem(`slot-slot-${d}-${h}`);
+                    if (saved) {
+                        const obj = JSON.parse(saved);
+                        const el = document.getElementById(`slot-${d}-${h}`);
+                        el.innerText = obj.txt; el.className = obj.cls;
+                    }
+                }
+            }
+        }
+        window.onload = init;
+    </script>
+</body>
+</html>
